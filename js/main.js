@@ -109,28 +109,28 @@
     /*-----------------------------
         Car thumb Slider
     -------------------------------*/
-    $(".car__thumb__slider").owlCarousel({
-        loop: true,
-        margin: 25,
-        items: 5,
-        dots: false,
-        smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true,
-        mouseDrag: false,
-        responsive: {
+    // $(".car__thumb__slider").owlCarousel({
+    //     loop: true,
+    //     margin: 25,
+    //     items: 5,
+    //     dots: false,
+    //     smartSpeed: 1200,
+    //     autoHeight: false,
+    //     autoplay: true,
+    //     mouseDrag: false,
+    //     responsive: {
 
-            768: {
-                items: 5
-            },
-            320: {
-                items: 3
-            },
-            0: {
-                items: 2
-            }
-        }
-    });
+    //         768: {
+    //             items: 5
+    //         },
+    //         320: {
+    //             items: 3
+    //         },
+    //         0: {
+    //             items: 2
+    //         }
+    //     }
+    // });
 
     /*-----------------------
 		Range Slider
