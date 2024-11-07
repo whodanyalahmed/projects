@@ -156,7 +156,7 @@
                         <div class="car__search">
                             <h5>Car Search</h5>
                             <form action="#">
-                                <input type="text" placeholder="Search...">
+                                <input type="text" id="search_car" placeholder="Search..." oninput="filterCars()">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
                                 <div class="car__filter__btn">
-                                    <button type="submit" class="site-btn">Reset FIlter</button>
+                                    <button type="button" onclick="resetFilters()" class="site-btn">Reset FIlter</button>
                                 </div>
                             </form>
                         </div>
@@ -861,7 +861,10 @@
             const engine = document.querySelector("#engine").value; // Get selected engine
             const color = document.querySelector("#colors").value; // Get selected color
             const bodyType = document.querySelector("#body_style").value; // Get selected body type
-
+            const searchName = document.querySelector("#search_car").value; // Get selected body type
+            console.log("searchName");
+            console.log(searchName);
+            
             var filterSlider = $(".filter-price-range");
             var currentMinValue = filterSlider.slider("values", 0);
             var currentMaxValue = filterSlider.slider("values", 1);
@@ -877,6 +880,7 @@
                 const isEngineValid = engine !== null && engine.trim() !== ""; // Check for engine validity
                 const isColorValid = color !== null && color.trim() !== ""; // Check for color validity
                 const isBodyTypeValid = bodyType !== null && bodyType.trim() !== ""; // Check for body type validity
+                const isSearchNameValid = searchName !== null && searchName.trim() !== ""; // Check for body type validity
 
                 const brandMatch = isBrandValid ? car.brand.toLowerCase().includes(brand) : true;
                 const modelMatch = isModelValid ? car.name.toLowerCase().includes(model) : true;
@@ -886,6 +890,7 @@
                 const engineMatch = isEngineValid ? car.engine.toLowerCase() === engine.toLowerCase() : true; // Check for engine match
                 const colorMatch = isColorValid ? car.color.toLowerCase() === color.toLowerCase() : true; // Check for color match
                 const bodyTypeMatch = isBodyTypeValid ? car.bodyType.toLowerCase() === bodyType.toLowerCase() : true; // Check for body type match
+                const searchNameMatch = isSearchNameValid ? car.name.toLowerCase().includes(searchName) : true; // Check for body type match
 
                 return (
                     brandMatch &&
@@ -896,6 +901,7 @@
                     engineMatch &&
                     colorMatch &&
                     bodyTypeMatch &&
+                    searchNameMatch &&
                     carPrice >= currentMinValue &&
                     carPrice <= currentMaxValue
                 );
@@ -905,16 +911,44 @@
         }
 
         $(document).ready(function () {
-
-            // Event listeners for filters
-            document.querySelector(".filter-price-range").addEventListener("input", filterCars);
-            populateBrands();
             populateTransmissions();
-            populateEngine()
-            populateColors();
+            populateBrands();
             populateMileage();
+            populateEngine();
+            populateColors();
             populateBodyType();
+            
+            // Update model dropdown when a brand is selected
+            $("#brand").on("change", function () {
+                const selectedBrand = $(this).val();
+                populateModels(selectedBrand);
+            });
         });
+
+        function resetFilters() {
+            // Clear the search input
+            document.getElementById('search_car').value = '';
+
+            // Reset all select dropdowns to their default values
+            const selectIds = ['brand', 'model', 'body_style', 'condition', 'transmission', 'mileage', 'engine', 'colors'];
+            selectIds.forEach(id => {
+                const selectElement = document.getElementById(id);
+                selectElement.selectedIndex = 0; // Reset to the first option
+                $(selectElement).niceSelect('update'); // Update Nice Select if used
+            });
+
+            // Clear the price range input
+            document.getElementById('filterAmount').value = '';
+
+            // Reset the price range slider
+            var filterSlider = $(".filter-price-range");
+
+            filterSlider.slider("values", [1, 1200000]); // Reset the slider values
+            $("#filterAmount").val("[ " + "$" + 1 + " - $" + 1200000 + " ]"); // Update displayed range
+
+            // Optionally, you can call a function to refresh the car listing
+            // refreshCarListing();
+        }
     </script>
 </body>
 
