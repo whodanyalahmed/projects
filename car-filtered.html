@@ -178,36 +178,36 @@
                                     <option value="AVENTADOR">AVENTADOR</option>
                                 </select>
                                 <select id="body_style" onChange="filterCars()">
-                                    <option value="" >Body Style</option>
+                                    <option value="">Body Style</option>
                                     <option value="Option 1">Option 1</option>
                                     <option value="Option 2">Option 2</option>
                                 </select>
                                 <select id="condition" onChange="filterCars()">
-                                    <option value="" >Condition</option>
+                                    <option value="">Condition</option>
                                     <option value="First Hand">First Hand</option>
                                     <option value="Second Hand">Second Hand</option>
                                 </select>
                                 <select id="transmission" onChange="filterCars()">
-                                    <option value="" >Transmisson</option>
+                                    <option value="">Transmisson</option>
                                     <option value="Bluetooth">Bluetooth</option>
                                     <option value="WiFi">WiFi</option>
                                 </select>
                                 <select id="mileage" onChange="filterCars()">
-                                    <option value="" >Mileage</option>
+                                    <option value="">Mileage</option>
                                     <option value="27">27</option>
                                     <option value="20">20</option>
                                     <option value="15">15</option>
                                     <option value="10">10</option>
                                 </select>
                                 <select id="engine" onChange="filterCars()">
-                                    <option value="" > Engine</option>
+                                    <option value=""> Engine</option>
                                     <option value="BS3">BS3</option>
                                     <option value="BS4">BS4</option>
                                     <option value="BS5">BS5</option>
                                     <option value="BS6">BS6</option>
                                 </select>
                                 <select id="colors" onChange="filterCars()">
-                                    <option value="" >Colors</option>
+                                    <option value="">Colors</option>
                                     <option value="Red">Red</option>
                                     <option value="Blue">Blue</option>
                                     <option value="Black">Black</option>
@@ -482,7 +482,7 @@
                 "status": "For Sale",
                 "price": "$40,000"
             },
-            
+
             {
                 year: 2017,
                 name: "BMW S1000RR 2019 M",
@@ -639,48 +639,119 @@
             let transmissions = [...new Set(cars.map(car => car.transmission))];
             console.log("transmissions");
             console.log(transmissions);
-            
+
             let $selectTransmission = $("#transmission");
             console.log("selectTransmission");
             console.log($selectTransmission);
-            
+
             // Clear existing options
             $selectTransmission.empty();
-            
+
             // Append the default option with data-display attribute
-            $selectTransmission.append($('<option></option>').val("").text("Select Transmission").attr("data-display", "Transmission")); 
+            $selectTransmission.append($('<option></option>').val("").text("Select Transmission").attr("data-display", "Transmission"));
 
             // Append new options
-            $.each(transmissions, function(index, transmission) {
+            $.each(transmissions, function (index, transmission) {
                 $selectTransmission.append($('<option></option>').val(transmission).text(transmission));
             });
-            
+
             // Refresh Nice Select
             $selectTransmission.niceSelect('update');
         }
         // create a function that populate brands options using cars
-       function populateBrands() {
+        function populateBrands() {
             let brands = [...new Set(cars.map(car => car.brand))];
             console.log("brands");
             console.log(brands);
-            
+
             let $selectBrand = $("#brand");
             console.log("selectBrand");
             console.log($selectBrand);
-            
+
             // Clear existing options
             $selectBrand.empty();
-            
+
             // Append the default option with data-display attribute
-            $selectBrand.append($('<option></option>').val("").text("Select Brand").attr("data-display", "Brand")); 
+            $selectBrand.append($('<option></option>').val("").text("Select Brand").attr("data-display", "Brand"));
 
             // Append new options
-            $.each(brands, function(index, brand) {
+            $.each(brands, function (index, brand) {
                 $selectBrand.append($('<option></option>').val(brand).text(brand));
             });
-            
+
             // Refresh Nice Select
             $selectBrand.niceSelect('update');
+        }
+        function populateMileage() {
+            let mileages = [...new Set(cars.map(car => car.mileage))];
+            console.log("mileages");
+            console.log(mileages);
+
+            let $selectMileage = $("#mileage");
+            console.log("selectMileage");
+            console.log($selectMileage);
+
+            // Clear existing options
+            $selectMileage.empty();
+
+            // Append the default option with data-display attribute
+            $selectMileage.append($('<option></option>').val("").text("Select Mileage").attr("data-display", "Mileage"));
+
+            // Append new options
+            $.each(mileages, function (index, mileage) {
+                $selectMileage.append($('<option></option>').val(mileage).text(mileage));
+            });
+
+            // Refresh Nice Select
+            $selectMileage.niceSelect('update');
+        }
+
+        function populateEngine() {
+            let engines = [...new Set(cars.map(car => car.engine))];
+            console.log("engines");
+            console.log(engines);
+
+            let $selectEngine = $("#engine");
+            console.log("selectEngine");
+            console.log($selectEngine);
+
+            // Clear existing options
+            $selectEngine.empty();
+
+            // Append the default option with data-display attribute
+            $selectEngine.append($('<option></option>').val("").text("Select Engine").attr("data-display", "Engine"));
+
+            // Append new options
+            $.each(engines, function (index, engine) {
+                $selectEngine.append($('<option></option>').val(engine).text(engine));
+            });
+
+            // Refresh Nice Select
+            $selectEngine.niceSelect('update');
+        }
+
+        function populateColors() {
+            let colors = [...new Set(cars.map(car => car.color))];
+            console.log("colors");
+            console.log(colors);
+
+            let $selectColor = $("#color");
+            console.log("selectColor");
+            console.log($selectColor);
+
+            // Clear existing options
+            $selectColor.empty();
+
+            // Append the default option with data-display attribute
+            $selectColor.append($('<option></option>').val("").text("Select Color").attr("data-display", "Color"));
+
+            // Append new options
+            $.each(colors, function (index, color) {
+                $selectColor.append($('<option></option>').val(color).text(color));
+            });
+
+            // Refresh Nice Select
+            $selectColor.niceSelect('update');
         }
         function populateModels(selectedBrand) {
 
@@ -688,26 +759,48 @@
             let models = [...new Set(cars.filter(car => car.brand.toLowerCase().includes(selectedBrand.toLowerCase())).map(car => car.model))];
             console.log("models");
             console.log(models);
-            
+
             let $selectModel = $("#model");
             console.log("selectModel");
             console.log($selectModel);
-            
+
             // Clear existing options
             $selectModel.empty();
-            
+
             // Append the default option with data-display attribute
-            $selectModel.append($('<option></option>').val("").text("Select Model").attr("data-display", "Model")); 
+            $selectModel.append($('<option></option>').val("").text("Select Model").attr("data-display", "Model"));
 
             // Append new options
-            $.each(models, function(index, model) {
+            $.each(models, function (index, model) {
                 $selectModel.append($('<option></option>').val(model).text(model));
             });
-            
+
             // Refresh Nice Select
             $selectModel.niceSelect('update');
         }
+        function populateBodyType() {
+            let bodyTypes = [...new Set(cars.map(car => car.bodyType))];
+            console.log("bodyTypes");
+            console.log(bodyTypes);
 
+            let $selectBodyType = $("#body_style");
+            console.log("selectBodyType");
+            console.log($selectBodyType);
+
+            // Clear existing options
+            $selectBodyType.empty();
+
+            // Append the default option with data-display attribute
+            $selectBodyType.append($('<option></option>').val("").text("Select Body Style").attr("data-display", "Body Style"));
+
+            // Append new options
+            $.each(bodyTypes, function (index, bodyType) {
+                $selectBodyType.append($('<option></option>').val(bodyType).text(bodyType));
+            });
+
+            // Refresh Nice Select
+            $selectBodyType.niceSelect('update');
+        }
         function capitalizeFirstChar(str) {
             if (!str) return str; // Check if the string is empty
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -715,7 +808,7 @@
         // Function to generate HTML for each car
         function renderCars(cars) {
             const carList = document.getElementById('car-list');
-            carList.innerHTML = ''; 
+            carList.innerHTML = '';
             cars.forEach(car => {
                 // Create car item HTML
                 const carItem = document.createElement('div');
@@ -760,76 +853,67 @@
         renderCars(cars);
 
         function filterCars() {
-            const brand = document.querySelector("#brand").value.toLowerCase(); // Convert to lowercase
-            console.log("Selected brand:", brand);
-            
-            const model = document.querySelector("#model").value.toLowerCase(); // Convert to lowercase
-            console.log("Selected model:", model);
-            
+            const brand = document.querySelector("#brand").value.toLowerCase();
+            const model = document.querySelector("#model").value.toLowerCase();
             const condition = document.querySelector("#condition").value;
-            console.log("Selected condition:", condition);
-            
-            const transmission = document.querySelector("#transmission").value; // Get selected transmission
-            console.log("Selected transmission:", transmission);
-            
+            const transmission = document.querySelector("#transmission").value;
+            const mileage = document.querySelector("#mileage").value; // Get selected mileage
+            const engine = document.querySelector("#engine").value; // Get selected engine
+            const color = document.querySelector("#colors").value; // Get selected color
+            const bodyType = document.querySelector("#body_style").value; // Get selected body type
+
             var filterSlider = $(".filter-price-range");
-            var currentMinValue = filterSlider.slider("values", 0); // Current minimum value
-            var currentMaxValue = filterSlider.slider("values", 1); // Current maximum value
-            console.log("Current minimum price value:", currentMinValue);
-            console.log("Current maximum price value:", currentMaxValue);
-            
+            var currentMinValue = filterSlider.slider("values", 0);
+            var currentMaxValue = filterSlider.slider("values", 1);
+
             const filteredCars = cars.filter(car => {
-                // Extract numeric price for comparison
                 const carPrice = parseFloat(car.price.replace(/[^0-9.]/g, ''));
-                console.log("Car price after parsing:", carPrice);
-                
-                // Check if values are valid (not null or empty)
+
                 const isBrandValid = brand !== null && brand.trim() !== "";
                 const isModelValid = model !== null && model.trim() !== "";
                 const isConditionValid = condition !== null && condition.trim() !== "";
-                const isTransmissionValid = transmission !== null && transmission.trim() !== ""; // Check for transmission validity
-                
-                console.log("Is brand valid:", isBrandValid);
-                console.log("Is model valid:", isModelValid);
-                console.log("Is condition valid:", isConditionValid);
-                console.log("Is transmission valid:", isTransmissionValid); // Log transmission validity
-                
-                if (isBrandValid) {
-                    console.log("IN IF BRAND");
-                    populateModels(brand);
-                }
-                
+                const isTransmissionValid = transmission !== null && transmission.trim() !== "";
+                const isMileageValid = mileage !== null && mileage.trim() !== ""; // Check for mileage validity
+                const isEngineValid = engine !== null && engine.trim() !== ""; // Check for engine validity
+                const isColorValid = color !== null && color.trim() !== ""; // Check for color validity
+                const isBodyTypeValid = bodyType !== null && bodyType.trim() !== ""; // Check for body type validity
+
                 const brandMatch = isBrandValid ? car.brand.toLowerCase().includes(brand) : true;
                 const modelMatch = isModelValid ? car.name.toLowerCase().includes(model) : true;
                 const conditionMatch = isConditionValid ? car.condition.toLowerCase() === condition.toLowerCase() : true;
-                const transmissionMatch = isTransmissionValid ? car.transmission.toLowerCase() === transmission.toLowerCase() : true; // Check for transmission match
+                const transmissionMatch = isTransmissionValid ? car.transmission.toLowerCase() === transmission.toLowerCase() : true;
+                const mileageMatch = isMileageValid ? car.mileage.toLowerCase() === mileage.toLowerCase() : true; // Check for mileage match
+                const engineMatch = isEngineValid ? car.engine.toLowerCase() === engine.toLowerCase() : true; // Check for engine match
+                const colorMatch = isColorValid ? car.color.toLowerCase() === color.toLowerCase() : true; // Check for color match
+                const bodyTypeMatch = isBodyTypeValid ? car.bodyType.toLowerCase() === bodyType.toLowerCase() : true; // Check for body type match
 
-                console.log(`Car: ${car.name}, Brand match: ${brandMatch}, Model match: ${modelMatch}, Condition match: ${conditionMatch}, Transmission match: ${transmissionMatch}`);
-                
                 return (
                     brandMatch &&
                     modelMatch &&
                     conditionMatch &&
-                    transmissionMatch && // Include transmission match in the filter
+                    transmissionMatch &&
+                    mileageMatch &&
+                    engineMatch &&
+                    colorMatch &&
+                    bodyTypeMatch &&
                     carPrice >= currentMinValue &&
                     carPrice <= currentMaxValue
                 );
             });
-            
-            console.log("Filtered cars:", filteredCars);
-            
+
             renderCars(filteredCars);
         }
+
         $(document).ready(function () {
-            
+
             // Event listeners for filters
-            document.querySelector("#brand").addEventListener("change", filterCars);
-            document.querySelector("#model").addEventListener("change", filterCars);
-            document.querySelector("#condition").addEventListener("change", filterCars);
             document.querySelector(".filter-price-range").addEventListener("input", filterCars);
             populateBrands();
             populateTransmissions();
-
+            populateEngine()
+            populateColors();
+            populateMileage();
+            populateBodyType();
         });
     </script>
 </body>

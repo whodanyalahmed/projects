@@ -164,9 +164,13 @@
         range: true,
         min: 1,
         max: 1200000,
-        values: [1, 1000000],
+        values: [1, 1200000 ],
         slide: function (event, ui) {
             $("#filterAmount").val("[ " + "$" + ui.values[0] + " - $" + ui.values[1] + " ]");
+        },
+        change: function(event, ui) {
+            // Call the filterCars function whenever the slider value changes
+            filterCars();
         }
     });
     $("#filterAmount").val("[ " + "$" + $(".filter-price-range").slider("values", 0) + " - $" + $(".filter-price-range").slider("values", 1) + " ]");
