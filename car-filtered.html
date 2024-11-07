@@ -247,9 +247,9 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="car__filter__option__item car__filter__option__item--right">
                                     <h6>Sort By</h6>
-                                    <select>
-                                        <option value="">Price: Highest Fist</option>
-                                        <option value="">Price: Lowest Fist</option>
+                                    <select id="sort_cars" onchange="sortCars()">
+                                        <option value="price_highest">Price: Highest Fist</option>
+                                        <option value="price_lowest">Price: Lowest Fist</option>
                                     </select>
                                 </div>
                             </div>
@@ -381,7 +381,7 @@
     <script>
         // Car data
         let currentPage = 1;
-        let totalCars = []; // Store the total cars for filtering
+        var totalCars = []; // Store the total cars for filtering
         const cars = [
             {
                 year: 2016,
@@ -864,8 +864,9 @@
             const bodyType = document.querySelector("#body_style").value; // Get selected body type
             const searchName = document.querySelector("#search_car").value; // Get selected body type
             const perPage = parseInt(document.querySelector("#per_page_cars").value); // Get the selected per page value
-            console.log("searchName");
-            console.log(searchName);
+            const sortOption = document.querySelector("#sort_cars").value; 
+            console.log("sortOption");
+            console.log(sortOption);
             
             var filterSlider = $(".filter-price-range");
             var currentMinValue = filterSlider.slider("values", 0);
@@ -893,6 +894,8 @@
                 const colorMatch = isColorValid ? car.color.toLowerCase() === color.toLowerCase() : true; // Check for color match
                 const bodyTypeMatch = isBodyTypeValid ? car.bodyType.toLowerCase() === bodyType.toLowerCase() : true; // Check for body type match
                 const searchNameMatch = isSearchNameValid ? car.name.toLowerCase().includes(searchName) : true; // Check for search name match
+                console.log("parse parseFloat");
+                console.log(parseFloat(car.price.replace(/[^0-9.]/g, '')));
 
                 return (
                     brandMatch &&
@@ -910,14 +913,29 @@
             });
             console.log("perPage");
             console.log(perPage);
-            
+            console.log("filteredCars1");
+            console.log(filteredCars);
+            // Sort the filtered cars based on the selected sort option
+            if (sortOption === "price_highest") {
+                console.log("price_highest");
+                
+                filteredCars.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g, '')) - parseFloat(a.price.replace(/[^0-9.]/g, '')));
+            } else if (sortOption === "price_lowest") {
+                console.log("price_lowest");
+                filteredCars.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g, '')) - parseFloat(b.price.replace(/[^0-9.]/g, '')));
+            }
+            console.log("filteredCars2");
+            console.log(filteredCars);
             // Limit the number of cars displayed based on the "per page" selection
-            const carsToDisplay = filteredCars.slice(0, perPage);
             totalCars = filteredCars; // Store the filtered results
             renderPagination(totalCars.length, perPage);
             // renderCars(carsToDisplay);
             displayCars(currentPage, perPage);
 
+        }
+        function sortCars(){
+            currentPage = 1; // Reset to the first page when sorting changes
+            filterCars(); // Re-filter cars
         }
         function renderPagination(totalCarsCount, perPage) {
             const paginationContainer = document.getElementById("pagination__option");
@@ -945,8 +963,10 @@
         function displayCars(page, perPage) {
             const start = (page - 1) * perPage;
             const end = start + perPage;
-            const carsToDisplay = cars.slice(start, end);
-
+            const carsToDisplay = totalCars.slice(start, end);
+            console.log("carsToDisplay");
+            console.log(carsToDisplay);
+            
             // Call your render function to display the cars
             renderCars(carsToDisplay);
         }
