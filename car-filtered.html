@@ -237,10 +237,10 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="car__filter__option__item">
                                     <h6>Show On Page</h6>
-                                    <select>
-                                        <option value="">9 Car</option>
-                                        <option value="">15 Car</option>
-                                        <option value="">20 Car</option>
+                                    <select class="show_on_page" id="per_page_cars" onchange="filterCars()">
+                                        <option value="9">9 Car</option>
+                                        <option value="15">15 Car</option>
+                                        <option value="20">20 Car</option>
                                     </select>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                     <div class="row" id="car-list">
                         <!-- JavaScript will inject car items here -->
                     </div>
-                    <div class="pagination__option">
+                    <div class="pagination__option" id="pagination__option">
                         <a href="#" class="active">1</a>
                         <a href="#">2</a>
                         <a href="#">3</a>
@@ -380,6 +380,8 @@
     <script src="js/main.js"></script>
     <script>
         // Car data
+        let currentPage = 1;
+        let totalCars = []; // Store the total cars for filtering
         const cars = [
             {
                 year: 2016,
@@ -850,8 +852,7 @@
         }
 
         // Render cars on page load
-        renderCars(cars);
-
+        filterCars(cars);
         function filterCars() {
             const brand = document.querySelector("#brand").value.toLowerCase();
             const model = document.querySelector("#model").value.toLowerCase();
@@ -862,6 +863,7 @@
             const color = document.querySelector("#colors").value; // Get selected color
             const bodyType = document.querySelector("#body_style").value; // Get selected body type
             const searchName = document.querySelector("#search_car").value; // Get selected body type
+            const perPage = parseInt(document.querySelector("#per_page_cars").value); // Get the selected per page value
             console.log("searchName");
             console.log(searchName);
             
@@ -880,7 +882,7 @@
                 const isEngineValid = engine !== null && engine.trim() !== ""; // Check for engine validity
                 const isColorValid = color !== null && color.trim() !== ""; // Check for color validity
                 const isBodyTypeValid = bodyType !== null && bodyType.trim() !== ""; // Check for body type validity
-                const isSearchNameValid = searchName !== null && searchName.trim() !== ""; // Check for body type validity
+                const isSearchNameValid = searchName !== null && searchName.trim() !== ""; // Check for search name validity
 
                 const brandMatch = isBrandValid ? car.brand.toLowerCase().includes(brand) : true;
                 const modelMatch = isModelValid ? car.name.toLowerCase().includes(model) : true;
@@ -890,7 +892,7 @@
                 const engineMatch = isEngineValid ? car.engine.toLowerCase() === engine.toLowerCase() : true; // Check for engine match
                 const colorMatch = isColorValid ? car.color.toLowerCase() === color.toLowerCase() : true; // Check for color match
                 const bodyTypeMatch = isBodyTypeValid ? car.bodyType.toLowerCase() === bodyType.toLowerCase() : true; // Check for body type match
-                const searchNameMatch = isSearchNameValid ? car.name.toLowerCase().includes(searchName) : true; // Check for body type match
+                const searchNameMatch = isSearchNameValid ? car.name.toLowerCase().includes(searchName) : true; // Check for search name match
 
                 return (
                     brandMatch &&
@@ -906,10 +908,48 @@
                     carPrice <= currentMaxValue
                 );
             });
+            console.log("perPage");
+            console.log(perPage);
+            
+            // Limit the number of cars displayed based on the "per page" selection
+            const carsToDisplay = filteredCars.slice(0, perPage);
+            totalCars = filteredCars; // Store the filtered results
+            renderPagination(totalCars.length, perPage);
+            // renderCars(carsToDisplay);
+            displayCars(currentPage, perPage);
 
-            renderCars(filteredCars);
         }
+        function renderPagination(totalCarsCount, perPage) {
+            const paginationContainer = document.getElementById("pagination__option");
+            paginationContainer.innerHTML = ""; // Clear previous pagination
 
+            const totalPages = Math.ceil(totalCarsCount / perPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement("a");
+                pageLink.href = "#";
+                pageLink.textContent = i;
+                pageLink.className = (i === currentPage) ? "active" : ""; // Set active class for current page
+
+                // Add click event to change the page
+                pageLink.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    currentPage = i; // Update current page
+                    displayCars(currentPage, perPage); // Display cars for the selected page
+                    renderPagination(totalCarsCount, perPage); // Re-render pagination
+                });
+
+                paginationContainer.appendChild(pageLink);
+            }
+        }
+        function displayCars(page, perPage) {
+            const start = (page - 1) * perPage;
+            const end = start + perPage;
+            const carsToDisplay = cars.slice(start, end);
+
+            // Call your render function to display the cars
+            renderCars(carsToDisplay);
+        }
         $(document).ready(function () {
             populateTransmissions();
             populateBrands();
