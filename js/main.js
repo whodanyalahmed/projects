@@ -8,7 +8,28 @@
 ---------------------------------------------------------  */
 
 'use strict';
+function loadNavbar() {
+    console.log( "loadNavbar function triggered");
+    
+    fetch('./../components/navbar.html')  // Fetch the navbar.html content
+      .then(response => response.text())  // Get the text content of the file
+      .then(data => {
+        console.log("data");
+        console.log(data);
+        
+        document.getElementById('navbar-container').innerHTML = data;  // Inject the navbar into the page
+      })
+      .catch(error => console.error('Error loading navbar:', error));
+  }
 
+// Call the loadNavbar function when the page loads
+window.onload = loadNavbar;
+
+function toggleMoboMenu() {
+    $(".main-nav.slide-in-nav").toggleClass("open");
+    // toggle body scrollbar also
+    $('body').toggleClass('noscroll');
+}
 (function ($) {
 
     /*------------------
