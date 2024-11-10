@@ -157,7 +157,9 @@ button.skip-main:focus,button.skip-main:active {
     button.skip-main {
         left:-105%
     }
-
+    .m-nav__recent path,.m-nav__signin g path,.m-nav__cta g path {
+        fill: #050f0c
+    }
     button.skip-main:focus,button.skip-main:active {
         border-radius: .5rem;
         width: 35%;
