@@ -24,88 +24,39 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <style>
-     .car-gallery {
-            display: flex;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .car-gallery {
+    display: flex;
+    align-items: flex-start;
+}
 
-        .main-image {
-            flex: 0 0 60%;
-        }
+.main-image {
+    width: 70%; /* Adjust width as needed */
+    margin-right: 10px;
+}
 
-        .main-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+.thumbnails {
+    width: 30%; /* Adjust width as needed */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 
-        .side-images {
-            flex: 0 0 40%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-        }
+.thumbnail-item {
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 3px;
+    transition: border-color 0.3s;
+}
 
-        .side-images img {
-            width: 100%;
-            height: 195px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+.thumbnail-item img {
+    width: 100%;
+    height: auto;
+}
 
-        .thumbnails {
-            margin-top: 20px;
-        }
+.thumbnail-item.active {
+    border-color: #007bff; /* Change to desired active border color */
+}
 
-        .thumbnail-item {
-            cursor: pointer;
-        }
-
-        .thumbnail-item img {
-            width: 100%;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 4px;
-            transition: opacity 0.3s;
-        }
-
-        .thumbnail-item.active img {
-            opacity: 0.7;
-        }
-
-        /* Owl Carousel Customization */
-        .owl-carousel .owl-nav button.owl-prev,
-        .owl-carousel .owl-nav button.owl-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: white !important;
-            width: 40px;
-            height: 40px;
-            border-radius: 50% !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .owl-carousel .owl-nav button.owl-prev {
-            left: -20px;
-        }
-
-        .owl-carousel .owl-nav button.owl-next {
-            right: -20px;
-        }
-
-        .owl-carousel .owl-nav button span {
-            font-size: 24px;
-            line-height: 24px;
-            color: #333;
-        }
 </style>
 <body>
     <!-- Page Preloder -->
@@ -235,56 +186,40 @@
     <section class="car-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
-                    <!-- <div class="car__details__pic">
-                        <div class="car__details__pic__large">
-                            <img class="car-big-img" src="img/cars/details/cd-1.jpg" alt="">
-                        </div>
-                        <div class="car-thumbs">
-                            <div class="car-thumbs-track car__thumb__slider owl-carousel">
-                                <div class="ct" data-imgbigurl="img/cars/details/cd-2.jpg"><img
-                                        src="img/cars/details/sm-1.jpg" alt=""></div>
-                                <div class="ct" data-imgbigurl="img/cars/details/cd-3.jpg"><img
-                                        src="img/cars/details/sm-2.jpg" alt=""></div>
-                                <div class="ct" data-imgbigurl="img/cars/details/cd-4.jpg"><img
-                                        src="img/cars/details/sm-3.jpg" alt=""></div>
-                                <div class="ct" data-imgbigurl="img/cars/details/cd-5.jpg"><img
-                                        src="img/cars/details/sm-4.jpg" alt=""></div>
-                                <div class="ct" data-imgbigurl="img/cars/details/cd-6.jpg"><img
-                                        src="img/cars/details/sm-5.jpg" alt=""></div>
-                            </div>
-                        </div>
-                    </div> -->
+                <div class="col-lg-12">
+                    
                     <div class="car-gallery">
                         <div class="main-image">
                             <img src="img/cars/details/cd-2.jpg" alt="Main car view" id="mainImage">
-                            <div class="thumbnails">
-                                <div class="owl-carousel owl-theme">
-                                    <div class="thumbnail-item active" data-image="img/cars/details/cd-2.jpg">
-                                        <img src="img/cars/details/sm-1.jpg" alt="Thumbnail 1">
-                                    </div>
-                                    <div class="thumbnail-item active" data-image="img/cars/details/cd-3.jpg">
-                                        <img src="img/cars/details/sm-2.jpg" alt="Thumbnail 2">
-                                    </div>
-                                    <div class="thumbnail-item" data-image="img/cars/details/cd-4.jpg">
-                                        <img src="img/cars/details/sm-3.jpg" alt="Thumbnail 3">
-                                    </div>
-                                    <div class="thumbnail-item" data-image="img/cars/details/cd-5.jpg">
-                                        <img src="img/cars/details/sm-4.jpg" alt="Thumbnail 4">
-                                    </div>
-                                    <div class="thumbnail-item" data-image="img/cars/details/cd-6.jpg">
-                                        <img src="img/cars/details/sm-5.jpg" alt="Thumbnail 5">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="thumbnails">
+                            <div class="thumbnail-item active" data-image="img/cars/details/cd-2.jpg">
+                                <img src="img/cars/details/sm-1.jpg" alt="Thumbnail 1">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-3.jpg">
+                                <img src="img/cars/details/sm-2.jpg" alt="Thumbnail 2">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-4.jpg">
+                                <img src="img/cars/details/sm-3.jpg" alt="Thumbnail 3">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-5.jpg">
+                                <img src="img/cars/details/sm-4.jpg" alt="Thumbnail 4">
+                            </div>
+                            <div class="thumbnail-item active" data-image="img/cars/details/cd-2.jpg">
+                                <img src="img/cars/details/sm-1.jpg" alt="Thumbnail 1">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-3.jpg">
+                                <img src="img/cars/details/sm-2.jpg" alt="Thumbnail 2">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-4.jpg">
+                                <img src="img/cars/details/sm-3.jpg" alt="Thumbnail 3">
+                            </div>
+                            <div class="thumbnail-item" data-image="img/cars/details/cd-5.jpg">
+                                <img src="img/cars/details/sm-4.jpg" alt="Thumbnail 4">
                             </div>
                         </div>
-                        <div class="side-images">
-                            <img src="img/cars/details/sm-1.jpg" alt="Interior view 1">
-                            <img src="img/cars/details/sm-2.jpg" alt="Interior view 2">
-                            <img src="img/cars/details/sm-3.jpg" alt="Interior view 3">
-                            <img src="img/cars/details/sm-4.jpg" alt="Interior view 4">
-                        </div>
                     </div>
+                    
                     <div class="car__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
@@ -654,28 +589,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="car__details__sidebar">
-                        <div class="car__details__sidebar__model">
-                            <ul>
-                                <li>Stock <span>K99D10459934</span></li>
-                                <li>Vin <span>3VWKM245686</span></li>
-                            </ul>
-                            <a href="#" class="primary-btn">Get Today Is Price</a>
-                            <p>Pricing in 11/26/2019</p>
-                        </div>
-                        <div class="car__details__sidebar__payment">
-                            <ul>
-                                <li>MSRP <span>$120,000</span></li>
-                                <li>Dealer Discounts <span>$3,000</span></li>
-                                <li>Price <span>$117,000</span></li>
-                            </ul>
-                            <a href="#" class="primary-btn"><i class="fa fa-credit-card"></i> Express Purchase</a>
-                            <a href="#" class="primary-btn sidebar-btn"><i class="fa fa-sliders"></i> Build Payment</a>
-                            <a href="#" class="primary-btn sidebar-btn"><i class="fa fa-money"></i> Value Trade</a>
                         </div>
                     </div>
                 </div>
