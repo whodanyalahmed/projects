@@ -663,8 +663,8 @@ a.sub-nav__link:hover,a.sub-nav__link:focus {
     color: white !important;
 }
 
-.m-icon svg {
-    max-width: 125px;
+.m-icon img {
+    max-width: 60px;
     margin: .9rem .5rem
 }
 
@@ -680,7 +680,7 @@ a.sub-nav__link:hover,a.sub-nav__link:focus {
         position: relative
     }
 
-    .m-icon svg {
+    .m-icon img {
         max-width: 100%;
         height: 41px
     }
